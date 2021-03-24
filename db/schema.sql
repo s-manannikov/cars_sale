@@ -20,13 +20,9 @@ create table history_owner (
     car_id int not null references car(id)
 );
 
-create table post (
+create table photo (
     id serial primary key,
-    description text,
-    car_id int references car(id),
-    photo_id int references photo(id),
-    status int,
-    user_id int references users(id)
+    name text
 );
 
 create table users (
@@ -36,7 +32,12 @@ create table users (
     password text
 );
 
-create table photo (
+create table post (
     id serial primary key,
-    name text
+    description text,
+    car_id int references car(id),
+    photo_id int references photo(id),
+    status int,
+    user_id int references users(id),
+    created timestamp
 );
