@@ -8,7 +8,7 @@
         <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/cars_sale</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">password</property>
-        <property name="hibernate.connection.pool_size">5</property>
+        <property name="hibernate.connection.pool_size">10</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL10Dialect</property>
@@ -23,5 +23,9 @@
         <mapping class="carsale.model.Photo"/>
         <mapping class="carsale.model.Post"/>
         <mapping class="carsale.model.User"/>
+        <mapping class="carsale.model.Brand"/>
+        <mapping class="carsale.model.Body"/>
+        <mapping class="carsale.model.Transmission"/>
+        <mapping class="carsale.model.City"/>
     </session-factory>
 </hibernate-configuration>

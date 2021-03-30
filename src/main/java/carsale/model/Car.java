@@ -1,8 +1,7 @@
 package carsale.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
 @Table(name = "car")
@@ -11,21 +10,33 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String brand;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 
     private String model;
 
-    private String body;
+    @ManyToOne
+    @JoinColumn(name = "body_id")
+    private Body body;
+
+    private String year;
+
+    private int hp;
+
+    private int mileage;
 
     @ManyToOne
-    @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
-    private Engine engine;
+    @JoinColumn(name = "transmission_id")
+    private Transmission transmission;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "history_owner",
-            joinColumns = {@JoinColumn(name = "car_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "driver_id", nullable = false, updatable = false)})
-    private Set<Driver> drivers = new HashSet<>();
+    private String color;
+
+    private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "engine_id")
+    private Engine engine;
 
     public int getId() {
         return id;
@@ -35,11 +46,11 @@ public class Car {
         this.id = id;
     }
 
-    public String getBrand() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 
@@ -51,12 +62,60 @@ public class Car {
         this.model = model;
     }
 
-    public String getBody() {
+    public Body getBody() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setBody(Body body) {
         this.body = body;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getMileage() {
+        return mileage;
+    }
+
+    public void setMileage(int mileage) {
+        this.mileage = mileage;
+    }
+
+    public Transmission getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public Engine getEngine() {
@@ -67,11 +126,26 @@ public class Car {
         this.engine = engine;
     }
 
-    public Set<Driver> getDrivers() {
-        return drivers;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return id == car.id
+                && hp == car.hp
+                && mileage == car.mileage
+                && price == car.price
+                && Objects.equals(brand, car.brand)
+                && Objects.equals(model, car.model)
+                && Objects.equals(body, car.body)
+                && Objects.equals(year, car.year)
+                && Objects.equals(transmission, car.transmission)
+                && Objects.equals(color, car.color)
+                && Objects.equals(engine, car.engine);
     }
 
-    public void setDrivers(Set<Driver> drivers) {
-        this.drivers = drivers;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, brand, model, body, year, hp, mileage, transmission, color, price, engine);
     }
 }

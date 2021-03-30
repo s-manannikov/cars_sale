@@ -1,23 +1,35 @@
 create table engine (
-    id serial primary key
+    id serial primary key,
+    name text
 );
 
-create table driver (
-    id serial primary key
+create table body (
+    id serial primary key,
+    name text
+);
+
+create table brand (
+    id serial primary key,
+    name text
+);
+
+create table transmission (
+    id serial primary key,
+    name text
 );
 
 create table car (
     id serial primary key,
-    brand text,
+    brand_id int references brand(id),
     model text,
-    body text,
+    body_id int references body(id),
+    year text,
+    hp int,
+    mileage int,
+    transmission_id int references transmission(id),
+    color text,
+    price int,
     engine_id int not null references engine(id)
-);
-
-create table history_owner (
-    id serial primary key,
-    driver_id int not null references driver(id),
-    car_id int not null references car(id)
 );
 
 create table photo (
@@ -29,7 +41,13 @@ create table users (
     id serial primary key,
     name text,
     email text unique,
+    phone text,
     password text
+);
+
+create table city (
+    id serial primary key,
+    name text
 );
 
 create table post (
@@ -39,5 +57,6 @@ create table post (
     photo_id int references photo(id),
     status int,
     user_id int references users(id),
-    created timestamp
+    created timestamp,
+    city_id int references city(id)
 );

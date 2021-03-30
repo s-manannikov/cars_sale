@@ -11,6 +11,7 @@ public class User {
     private int id;
     private String name;
     private String email;
+    private String phone;
     private String password;
 
     public int getId() {
@@ -37,6 +38,14 @@ public class User {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -53,11 +62,12 @@ public class User {
         return id == user.id
                 && Objects.equals(name, user.name)
                 && Objects.equals(email, user.email)
+                && Objects.equals(phone, user.phone)
                 && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password);
+        return Objects.hash(id, name, email, phone, password);
     }
 }

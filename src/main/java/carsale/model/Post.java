@@ -13,11 +13,11 @@ public class Post {
 
     private String description;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn (name="car_id")
     private Car car;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn (name="photo_id")
     private Photo photo;
 
@@ -27,7 +27,12 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+
+    @OneToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
     public int getId() {
         return id;
@@ -85,6 +90,14 @@ public class Post {
         this.created = created;
     }
 
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,24 +109,12 @@ public class Post {
                 && Objects.equals(car, post.car)
                 && Objects.equals(photo, post.photo)
                 && Objects.equals(user, post.user)
-                && Objects.equals(created, post.created);
+                && Objects.equals(created, post.created)
+                && Objects.equals(city, post.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, car, photo, status, user, created);
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", description='" + description + '\'' +
-                ", car=" + car +
-                ", photo=" + photo +
-                ", status=" + status +
-                ", user=" + user +
-                ", created=" + created +
-                '}';
+        return Objects.hash(id, description, car, photo, status, user, created, city);
     }
 }

@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "engine")
-public class Engine {
+@Table(name = "brand")
+public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    String name;
 
     public int getId() {
         return id;
@@ -31,8 +31,8 @@ public class Engine {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Engine engine = (Engine) o;
-        return id == engine.id && Objects.equals(name, engine.name);
+        Brand brand = (Brand) o;
+        return id == brand.id && Objects.equals(name, brand.name);
     }
 
     @Override
