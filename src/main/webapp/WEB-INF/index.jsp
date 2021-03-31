@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 <style><%@include file="/scripts/style.css"%></style>
 <script><%@include file="/scripts/app.js"%></script>
 
@@ -81,7 +82,8 @@
                 Year: <c:out value="${post.car.year}"/><br>
                 Mileage: <c:out value="${post.car.mileage}"/> km<br>
                 Color: <c:out value="${post.car.color}"/><br><br>
-                Date: <c:out value="${post.created}"/><br>
+                <c:set var="date" value="${post.created}"/>
+                Date: <fmt:formatDate type="both" value="${date}"/><br>
                 Phone: <c:out value="${post.user.phone}"/><br><br>
                 <c:out value="${post.description}"/>
             </p>
