@@ -11,6 +11,10 @@ before_install:
 
 sudo: false
 
+env:
+  global:
+    - CODECOV_TOKEN="fa13fb95-3aa8-4350-9da8-2541382f19cb"
+
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
