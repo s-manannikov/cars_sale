@@ -81,7 +81,7 @@
                 Horsepower: <c:out value="${post.car.hp}"/><br>
                 Year: <c:out value="${post.car.year}"/><br>
                 Mileage: <c:out value="${post.car.mileage}"/> km<br>
-                Color: <c:out value="${post.car.color}"/><br><br>
+                Color: <c:out value="${post.car.color}"/><br>
                 <c:set var="date" value="${post.created}"/>
                 Date: <fmt:formatDate type="both" value="${date}"/><br>
                 Phone: <c:out value="${post.user.phone}"/><br><br>
